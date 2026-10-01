@@ -5,8 +5,8 @@ A modern, responsive task management application built with React + Vite. Design
 **Intern:** Hefza Munsha | **Program:** AUREX Full-Stack Internship - Week 1 React Task
 
 ### 🔗 Live Demo
-**Live Link:** aurex-react-1.vercel.app
-**GitHub Repo:** https://github.com/Hefza-Munsha55/aurex-react
+**Live Link:** [https://aurex-react-1.vercel.app](https://aurex-react-1.vercel.app)  
+**GitHub Repo:** [https://github.com/Hefza-Munsha55/aurex-react](https://github.com/Hefza-Munsha55/aurex-react)
 
 ### ✨ Core Features
 - **Add Tasks:** Controlled form input with useState
