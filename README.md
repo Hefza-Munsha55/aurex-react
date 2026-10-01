@@ -1,16 +1,56 @@
-# React + Vite
+# TaskFlow - AUREX Internship (Month 2)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive task management application built with React + Vite. Designed for productivity with a clean, dark UI and fully responsive mobile experience.
 
-Currently, two official plugins are available:
+**Intern:** Hefza Munsha | **Program:** AUREX Full-Stack Internship - Week 1 React Task
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### 🔗 Live Demo
+**Live Link:** aurex-react-1.vercel.app
+**GitHub Repo:** https://github.com/Hefza-Munsha55/aurex-react
 
-## React Compiler
+### ✨ Core Features
+- **Add Tasks:** Controlled form input with useState
+- **Dynamic Rendering:** Tasks rendered dynamically using list mapping with unique keys
+- **Toggle Completion:** Mark task as complete / incomplete
+- **Delete Tasks:** Remove tasks from list state
+- **Input Validation:** Prevents empty task submission
+- **Live Stats:** Real-time Total, Pending, Completed count
+- **Fully Responsive:** No cut on mobile, optimized for all screens
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🧱 Component Hierarchy (As per AUREX Requirement)
+App.jsx (Main State)
+ ├── Header.jsx
+ ├── TaskForm.jsx (Handles input state & submission)
+ ├── TaskList.jsx (Maps through array)
+ │    └── TaskItem.jsx (Individual task display & actions)
+ └── Stats
+ 
+### 🛠️ Tech Stack
+- React 18 + Vite, JSX, Hooks (useState)
+- CSS3 - Flexbox, Grid, Radial Gradient, Media Queries
+- State Lifting via Props
+- Deployed on Vercel
 
-## Expanding the ESLint configuration
+### 📁 Folder Structure
+src/
+├── components/
+│   ├── Header.jsx
+│   ├── TaskForm.jsx
+│   ├── TaskList.jsx
+│   └── TaskItem.jsx
+├── App.jsx
+├── App.css
+└── main.jsx
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🚀 Setup 
+git clone https://github.com/Hefza-Munsha55/week-1-react-task
+cd week-1-react-task
+npm install
+npm run dev
+
+🎯 Learning Outcomes
+- React fundamentals, Components, Props & State
+- Controlled forms and validation
+- List rendering with keys and conditional rendering
+- Reusable component architectureFixed real-world responsive issues (mobile cut, button wrapping)
+👩‍💻 AuthorHefza Munsha - AUREX Intern© 2026 AUREX Internship - TaskFlow
