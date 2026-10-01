@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+/*import { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -79,7 +79,7 @@ function App() {
           <button onClick={addTask}>+ Add Task</button>
         </div>
 
-        {/* YE NAYA ADD KIYA HAI */}
+        {/* YE NAYA ADD KIYA HAI }
         <div className="filter-row" style={{ display: 'flex', gap: '8px', margin: '15px 0' }}>
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search task..." style={{ flex: 1 }} />
           <button onClick={() => setFilter('all')} style={{ background: filter === 'all' ? '#7c3aed' : '' }}>All</button>
@@ -114,6 +114,67 @@ function App() {
       </div>
       <p className="footer">TaskFlow • v2026.1 • Built for Aurex Internship • Hefza Munsha</p>
     </div>
+  );
+}
+export default App;*/
+
+import { useState, useEffect } from 'react';
+import './App.css';
+
+function App() {
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem('taskflow_final');
+    return saved? JSON.parse(saved) : [{ id: 1, text: "Design homepage hero section", completed: false }];
+  });
+  const [input, setInput] = useState('');
+  const [editId, setEditId] = useState(null);
+  const [editText, setEditText] = useState('');
+  const [filter, setFilter] = useState('all');
+  const [search, setSearch] = useState('');
+
+  useEffect(() => { localStorage.setItem('taskflow_final', JSON.stringify(tasks)); }, [tasks]);
+
+  const filteredTasks = tasks.filter(t => {
+    const f = filter === 'all' || (filter === 'done'? t.completed :!t.completed);
+    const s = t.text.toLowerCase().includes(search.toLowerCase());
+    return f && s;
+  });
+
+  const addTask = () => { if (!input.trim()) return; setTasks([{ id: Date.now(), text: input, completed: false },...tasks]); setInput(''); };
+  const deleteTask = (id) => setTasks(tasks.filter(t => t.id!== id));
+  const toggleTask = (id) => setTasks(tasks.map(t => t.id === id? {...t, completed:!t.completed } : t));
+  const startEdit = (task) => { setEditId(task.id); setEditText(task.text); };
+  const saveEdit = () => { if (!editText.trim()) return; setTasks(tasks.map(t => t.id === editId? {...t, text: editText } : t)); setEditId(null); };
+
+  return (
+    <div className="bg"><div className="main-card">
+        <div className="top-bar"><div className="left"><div className="at-logo">AT</div><div><h1>TaskFlow</h1><p>• Aurex Internship • Hefza Munsha</p></div></div></div>
+        <div className="stats-row">
+          <div className="stat-card"><div className="icon purple">☰</div><div className="stat-info"><span>Total</span><b>{tasks.length}</b></div></div>
+          <div className="stat-card"><div className="icon pink">◷</div><div className="stat-info"><span>Pending</span><b>{tasks.filter(t=>!t.completed).length}</b></div></div>
+          <div className="stat-card"><div className="icon green">✓</div><div className="stat-info"><span>Done</span><b>{tasks.filter(t=>t.completed).length}</b></div></div>
+        </div>
+        <div className="input-row">
+          <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && addTask()} placeholder="What needs to be done?" />
+          <button onClick={addTask}>+ Add Task</button>
+        </div>
+        <div style={{display:'flex', gap:'8px', margin:'15px 0'}}>
+          <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="🔍 Search..." style={{flex:1, padding:'10px', borderRadius:'8px'}} />
+          <button onClick={()=>setFilter('all')} style={{padding:'8px 12px', background: filter==='all'?'#7c3aed':'#334155', color:'white', borderRadius:'8px'}}>All</button>
+          <button onClick={()=>setFilter('pending')} style={{padding:'8px 12px', background: filter==='pending'?'#ec4899':'#334155', color:'white', borderRadius:'8px'}}>Pending</button>
+          <button onClick={()=>setFilter('done')} style={{padding:'8px 12px', background: filter==='done'?'#10b981':'#334155', color:'white', borderRadius:'8px'}}>Done</button>
+        </div>
+        <div className="tasks-head"><h3>Tasks</h3><span className="badge">{filteredTasks.length} task</span></div>
+        <div className="list">
+          {filteredTasks.map(task => (
+            <div key={task.id} className={`task-row ${task.completed? 'done' : ''}`}>
+              <label className="check"><input type="checkbox" checked={task.completed} onChange={() => toggleTask(task.id)} /><span></span></label>
+              {editId === task.id? <div className="edit-inline"><input value={editText} onChange={e => setEditText(e.target.value)} autoFocus /><button onClick={saveEdit}>Save</button></div> : <p>{task.text}</p>}
+              <div className="actions"><button onClick={() => startEdit(task)} className="edit-btn">✏️ Edit</button><button onClick={() => deleteTask(task.id)} className="del-btn">🗑️ Delete</button></div>
+            </div>
+          ))}
+        </div>
+    </div><p className="footer">TaskFlow • v2026.1 • Built for Aurex Internship • Hefza Munsha</p></div>
   );
 }
 export default App;
